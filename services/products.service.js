@@ -168,8 +168,24 @@ class ProductsService {
                 throw error;
             }
 
-            throw new HttpError('Data service unavailable', 500);
+            throw ProductsService._build_data_service_error(error);
         }
+    }
+
+    static _build_data_service_error(error) {
+        const details = process.env.NODE_ENV === 'production'
+            ? null
+            : ProductsService._get_data_service_error_details(error);
+
+        return new HttpError('Data service unavailable', 500, details);
+    }
+
+    static _get_data_service_error_details(error) {
+        if (error?.code) {
+            return `Firestore ${error.code}: ${error.message}`;
+        }
+
+        return error?.message || 'Unknown data service error';
     }
 
     static async _with_timeout(promise, timeout_ms) {

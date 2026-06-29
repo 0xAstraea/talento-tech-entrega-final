@@ -1,0 +1,31 @@
+info:
+  name: 07 Update product
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: http://localhost:3000/api/products/{{product_id}}
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{bearer_token}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Notebook Pro",
+        "price": 1450,
+        "stock": 8,
+        "description": "Notebook actualizada para oficina",
+        "category": "technology",
+        "image_url": "https://example.com/notebook-pro.jpg"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

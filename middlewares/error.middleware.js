@@ -9,7 +9,8 @@ class HttpError extends Error {
 
 function error_middleware(error, request, response, next) {
     const status_code = error.status_code || error.status || 500;
-    const message = status_code >= 500
+    const is_controlled_error = error instanceof HttpError;
+    const message = status_code >= 500 && !is_controlled_error
         ? 'Internal server error'
         : error.message;
 

@@ -1,0 +1,29 @@
+info:
+  name: 05 Create product without token
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: http://localhost:3000/api/products/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Notebook",
+        "price": 1200,
+        "stock": 10,
+        "description": "Notebook para oficina",
+        "category": "technology",
+        "image_url": "https://example.com/notebook.jpg"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
