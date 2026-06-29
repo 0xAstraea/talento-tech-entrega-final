@@ -5,6 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
+        "check:production": "node scripts/production_check.js",
         "start": "node index.js"
     },
     "keywords": [

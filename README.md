@@ -12,6 +12,12 @@ npm run start
 El servidor usa `PORT=3000` por defecto. Las variables necesarias estan documentadas en `.env.example`.
 `DATA_SERVICE_TIMEOUT_MS` controla cuanto espera la API a Firestore antes de devolver error `500`.
 
+Antes de desplegar, ejecutar:
+
+```bash
+npm run check:production
+```
+
 ## Autenticacion
 
 `POST /auth/login`
@@ -89,3 +95,20 @@ Para pruebas de entrega podes usar el ejemplo de `firestore.rules.example`. La s
 ## Errores
 
 La API devuelve errores JSON con estados `400`, `401`, `403`, `404` y `500` segun corresponda.
+
+Formato:
+
+```json
+{
+    "success": false,
+    "error": {
+        "code": "BAD_REQUEST",
+        "message": "Invalid JSON body"
+    }
+}
+```
+
+## Vercel
+
+El archivo `vercel.json` enruta todas las peticiones a `index.js` usando `@vercel/node`.
+Configura las variables de `.env.example` en Vercel Project Settings antes del deploy.
